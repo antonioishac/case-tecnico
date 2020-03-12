@@ -41,7 +41,7 @@ public class EstadoService {
 		if (verificaEstado.isPresent()) {
 			throw new EstadoExistenteException(estado.getNome(), estado.getSigla());
 		}
-		return repository.save(estado);
+		return repository.saveAndFlush(estado);
 	}
 
 	/**

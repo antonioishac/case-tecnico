@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.casetecnico.api.event.RecursoCriadoEvent;
+import br.com.casetecnico.domain.exception.EstadoNaoEncontradaException;
+import br.com.casetecnico.domain.exception.NegocioException;
 import br.com.casetecnico.domain.model.Banco;
 import br.com.casetecnico.service.BancoService;
 import br.com.casetecnico.service.filter.BancoFilter;
@@ -37,18 +39,23 @@ public class BancoController {
 	@Autowired
 	private ApplicationEventPublisher publisher;
 
+	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping
 	@ApiOperation(value = "Cadastrar bancos", response = Banco.class,
-		notes = "Essa opera\u00e7\u00e3o cadastra um estado")
-	public ResponseEntity<Banco> criarBanco(@RequestBody @Valid Banco banco, HttpServletResponse response) {
-		Banco bancoSalvo = service.criar(banco);
-		publisher.publishEvent(new RecursoCriadoEvent(this, response, banco.getCodigo()));
-		return ResponseEntity.ok(bancoSalvo);
+		notes = "Essa opera\u00e7\u00e3o cadastra um banco")
+	public Banco criarBanco(@RequestBody @Valid Banco banco, HttpServletResponse response) {
+		try {
+			Banco bancoSalvo = service.criar(banco);
+			publisher.publishEvent(new RecursoCriadoEvent(this, response, banco.getCodigo()));
+			return bancoSalvo;
+		} catch (EstadoNaoEncontradaException e) {
+			throw new NegocioException(e.getMessage());
+		}
 	}
 
 	@GetMapping
 	@ApiOperation(value = "Listar bancos", response = Banco.class,
-	notes = "Essa opera\u00e7\u00e3o lista todos os bancos ativos")
+		notes = "Essa opera\u00e7\u00e3o lista todos os bancos ou filtra por: nome, ag\u00eancia, cidade, cep")
 	public ResponseEntity<Page<Banco>> listarExamesAtivos(BancoFilter filter, Pageable pageable) {
 		Page<Banco> bancos = service.filtrarBanco(filter, pageable);
 		return bancos == null ? ResponseEntity.noContent().build() : ResponseEntity.ok(bancos);
@@ -56,8 +63,8 @@ public class BancoController {
 
 	@PutMapping("/{codigo}")
 	@ApiOperation(value = "Atualizar banco", response = Banco.class,
-	notes = "Essa opera\u00e7\u00e3o atualiza um banco.")
-	public ResponseEntity<Banco> atualizarBanco(@PathVariable Long codigo, @RequestBody Banco banco) {
+		notes = "Essa opera\u00e7\u00e3o atualiza um banco.")
+	public ResponseEntity<Banco> atualizarBanco(@PathVariable Long codigo, @RequestBody @Valid Banco banco) {
 		Banco bancoSalvo = service.atualizar(codigo, banco);
 		return ResponseEntity.ok(bancoSalvo);
 	}
@@ -65,13 +72,14 @@ public class BancoController {
 
 	@GetMapping("/{codigo}")
 	@ApiOperation(value = "Buscar banco pelo c\u00f3digo", response = Banco.class,
-	notes = "Essa opera\u00e7\u00e3o busca pelo c\u00f3digo do estado.")
+		notes = "Essa opera\u00e7\u00e3o busca pelo c\u00f3digo do banco.")
 	public ResponseEntity<Banco> buscarBancoPeloCodigo(@PathVariable Long codigo) {
 		Banco banco = service.buscarBancoPeloCodigo(codigo);
 		return ResponseEntity.ok(banco);
 	}
 
 	@DeleteMapping("/{bancoId}")
+	@ApiOperation(value = "Remover um banco", notes = "Essa opera\u00e7\u00e3o remove um banco pelo c\u00f3digo.")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void remover(@PathVariable Long bancoId) {
 		service.excluir(bancoId);

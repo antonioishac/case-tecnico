@@ -9,8 +9,6 @@ import lombok.Data;
  */
 @Data
 public class EstadoFilter {
-
 	private String nome;
 	private String sigla;
-
 }

@@ -8,7 +8,7 @@ logging:
 spring: 
   flyway:
     locations:
-    - classpath:/db/testdata
+    - classpath:db/testdata
   jpa:
     database: h2
     show-sql: true

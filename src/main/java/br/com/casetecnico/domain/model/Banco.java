@@ -10,7 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -49,9 +51,11 @@ public class Banco implements Serializable {
 
 	@ApiModelProperty(value = "Nome da Agencia", example = "000125-7", required = true)
 	@NotBlank(message = "{casetec-banco-agencia}")
-	@Column(name = "AGENCIA")
+	@Size(max = 20, message = "{casetec-banco-agencia-max}")
+	@Column(name = "AGENCIA", length = 20)
 	private String agencia;
 
+	@Valid
 	@Embedded
 	private Endereco endereco;
 

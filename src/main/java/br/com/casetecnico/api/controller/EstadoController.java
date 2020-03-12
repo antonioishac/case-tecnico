@@ -48,7 +48,7 @@ public class EstadoController {
 
 	@GetMapping
 	@ApiOperation(value = "Listar estados", response = Estado.class,
-	notes = "Essa opera\u00e7\u00e3o lista todos os estados")
+		notes = "Essa opera\u00e7\u00e3o lista todos os estados")
 	public ResponseEntity<Page<Estado>> listarExamesAtivos(EstadoFilter filter, Pageable pageable) {
 		Page<Estado> estados = service.filtrarEstado(filter, pageable);
 		return estados == null ? ResponseEntity.noContent().build() : ResponseEntity.ok(estados);
@@ -56,8 +56,8 @@ public class EstadoController {
 
 	@PutMapping("/{codigo}")
 	@ApiOperation(value = "Atualizar estado", response = Estado.class,
-	notes = "Essa opera\u00e7\u00e3o atualiza um estado.")
-	public ResponseEntity<Estado> atualizarEstado(@PathVariable Long codigo, @RequestBody Estado estado) {
+		notes = "Essa opera\u00e7\u00e3o atualiza um estado.")
+	public ResponseEntity<Estado> atualizarEstado(@PathVariable Long codigo, @RequestBody @Valid Estado estado) {
 		Estado estadoSalvo = service.atualizar(codigo, estado);
 		return ResponseEntity.ok(estadoSalvo);
 	}
@@ -65,13 +65,14 @@ public class EstadoController {
 
 	@GetMapping("/{codigo}")
 	@ApiOperation(value = "Buscar estado pelo c\u00f3digo", response = Estado.class,
-	notes = "Essa opera\u00e7\u00e3o busca pelo c\u00f3digo do estado.")
+		notes = "Essa opera\u00e7\u00e3o busca pelo c\u00f3digo do estado.")
 	public ResponseEntity<Estado> buscarEstadoPeloCodigo(@PathVariable Long codigo) {
 		Estado estado = service.buscarEstadoPeloCodigo(codigo);
 		return ResponseEntity.ok(estado);
 	}
 
 	@DeleteMapping("/{estadoId}")
+	@ApiOperation(value = "Remover um estado", notes = "Essa opera\u00e7\u00e3o remove um estado pelo c\u00f3digo.")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void remover(@PathVariable Long estadoId) {
 		service.excluir(estadoId);

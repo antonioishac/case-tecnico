@@ -11,6 +11,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import br.com.casetecnico.domain.exception.EntidadeEmUsoException;
+import br.com.casetecnico.domain.exception.EstadoExistenteException;
+import br.com.casetecnico.domain.exception.EstadoNaoEncontradaException;
 import br.com.casetecnico.domain.model.Estado;
 import br.com.casetecnico.service.EstadoService;
 
@@ -25,8 +28,8 @@ public class EstadoIntegrationTests {
 	@Test
 	public void testarCadastroEstadoComSucesso() {
 		Estado novoEstado = new Estado();
-		novoEstado.setNome("São Paulo");
-		novoEstado.setSigla("SP");
+		novoEstado.setNome("Rio Grande so Sul");
+		novoEstado.setSigla("RS");
 
 		novoEstado = service.criar(novoEstado);
 
@@ -40,6 +43,31 @@ public class EstadoIntegrationTests {
 		novoEstado.setNome(null);
 
 		novoEstado = service.criar(novoEstado);
+	}
+
+	@Test(expected = EstadoNaoEncontradaException.class)
+	public void testarEstadoNaoEncontrado() {
+		service.buscarEstadoPeloCodigo(150L);
+	}
+
+	@Test(expected = EstadoExistenteException.class)
+	public void testarCadastroUmEstadoExistente() {
+		Estado novoEstado = new Estado();
+		novoEstado.setNome("São Paulo");
+		novoEstado.setSigla("SP");
+
+		novoEstado = service.criar(novoEstado);
+	}
+
+	@Test(expected = EntidadeEmUsoException.class)
+	public void testarExcluirEstadosEmUso() {
+		service.excluir(1L);
+	}
+
+	@Test
+	public void testarBuscarEstadoPeloCodigo() {
+		Estado estado = service.buscarEstadoPeloCodigo(1L);
+		assertThat(estado).isNotNull();
 	}
 
 }

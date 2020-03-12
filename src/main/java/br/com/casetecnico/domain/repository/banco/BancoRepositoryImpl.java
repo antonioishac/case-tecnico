@@ -17,7 +17,6 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 import br.com.casetecnico.domain.model.Banco;
-import br.com.casetecnico.domain.model.Endereco;
 import br.com.casetecnico.service.filter.BancoFilter;
 
 public class BancoRepositoryImpl implements BancoRepositoryQuery {

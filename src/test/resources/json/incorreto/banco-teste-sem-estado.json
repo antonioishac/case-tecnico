@@ -1,0 +1,10 @@
+{
+  "agencia": "102030-7",
+  "endereco": {
+    "bairro": "Jardim Luiza",
+    "cep": 85608570,
+    "cidade": "São Paulo",
+    "logradouro": "Rua do teste sem estado"
+  },
+  "nome": "Banco Teste inválido sem estado"
+}

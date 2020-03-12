@@ -1,0 +1,13 @@
+{
+  "agencia": "8585-7",
+  "endereco": {
+    "bairro": "Jardim Luis",
+    "cep": 1585687,
+    "cidade": "São Paulo",
+    "estado": {
+      "codigo": 10000
+   	},
+    "logradouro": "Rua do teste"
+  },
+  "nome": "Banco Teste inválido"
+}
