@@ -11,16 +11,12 @@ spring:
     show-sql: true
     hibernate:
       naming:
-        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-    properties:
-      org.hibernate.envers.revision_field_name: ID_REVI
-      org.hibernate.envers.revision_type_field_name: ST_REVI
-      org.hibernate.envers.store_data_at_delete: true
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl    
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://localhost:3306/case-tecnico?useSSL=false
-    username: root
-    password: jesuscristo
+    url: ${JDBC_DATABASE_URL}
+    username: ${JDBC_DATABASE_USERNAME}
+    password: ${JDBC_DATABASE_PASSWORD}
     hikari:
       minimum-idle: 5
       # NUMERO MAXIMO DO POOL DE CONEXAO
@@ -44,4 +40,5 @@ spring:
   mvc:
     throw-exception-if-no-handler-found: true
   profiles:
-    active: prod    
+    active: prod
+ 
