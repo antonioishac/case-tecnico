@@ -5,7 +5,7 @@ package br.com.casetecnico.domain.exception;
  * Classe de exception que trata se o estado j\u00e1 est\u00e1 cadastrado.
  *
  */
-public class EstadoExistenteException extends EntidadeNaoEncontradaException {
+public class EstadoExistenteException extends NegocioException {
 
 	private static final long serialVersionUID = -5570029423839767906L;
 

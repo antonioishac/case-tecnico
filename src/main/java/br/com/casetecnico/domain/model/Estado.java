@@ -34,7 +34,7 @@ public class Estado implements Serializable {
 	private static final long serialVersionUID = -862063339313509465L;
 
 	@NotNull(groups = Groups.EstadoId.class, message = "{casetec-estado-codigo}")
-	@ApiModelProperty(readOnly = true)
+	@ApiModelProperty(value = "Código do estado", example = "1")
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")

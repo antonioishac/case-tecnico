@@ -1,0 +1,13 @@
+{
+  "agencia": "123-1",
+  "endereco": {
+    "bairro": "Jardim Santa Elena",
+    "cep": 12213432,
+    "cidade": "São Paulo",
+    "estado": {
+      "codigo": 1
+    },
+    "logradouro": "Rua da patrulha"
+  },
+  "nome": "Agencia Teste 1"
+}

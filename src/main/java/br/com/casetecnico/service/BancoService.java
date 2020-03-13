@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import br.com.casetecnico.domain.exception.BancoExistenteException;
 import br.com.casetecnico.domain.exception.BancoNaoEncontradaException;
 import br.com.casetecnico.domain.exception.EstadoNaoEncontradaException;
 import br.com.casetecnico.domain.model.Banco;
@@ -36,6 +37,10 @@ public class BancoService {
 	 * @return Banco
 	 */
 	public Banco criar(Banco banco) {
+		Optional<Banco> existeBanco = repository.findByAgenciaAndNome(banco.getAgencia(), banco.getNome());
+		if (existeBanco.isPresent()) {
+			throw new BancoExistenteException(banco.getAgencia(), banco.getNome());
+		}
 		Long estadoId = banco.getEndereco().getEstado().getCodigo();
 		Estado estado = estadoService.buscarEstadoPeloCodigo(estadoId);
 		banco.getEndereco().setEstado(estado);

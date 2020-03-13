@@ -31,9 +31,11 @@ public class BancoIT {
 
 	private String jsonCorretoBancoTeste;
 
-	private String jsonCorretoBancoSemEstadoTeste;
+	private String jsonIncorretoBancoSemEstadoTeste;
 
-	private String jsonCorretoBancoComEstadoInexistenteTeste;
+	private String jsonIncorretoBancoComEstadoInexistenteTeste;
+
+	private String jsonIncorretoBancoComNomeAgenciaJaCadastradoTeste;
 
 	@LocalServerPort
 	private int port;
@@ -47,11 +49,14 @@ public class BancoIT {
 		jsonCorretoBancoTeste = ResourceUtils.getContentFromResource(
 				"/json/correto/banco-teste.json");
 
-		jsonCorretoBancoSemEstadoTeste = ResourceUtils.getContentFromResource(
+		jsonIncorretoBancoSemEstadoTeste = ResourceUtils.getContentFromResource(
                 "/json/incorreto/banco-teste-sem-estado.json");
 
-		jsonCorretoBancoComEstadoInexistenteTeste = ResourceUtils.getContentFromResource(
+		jsonIncorretoBancoComEstadoInexistenteTeste = ResourceUtils.getContentFromResource(
                 "/json/incorreto/banco-teste-com-estado-invalido.json");
+
+		jsonIncorretoBancoComNomeAgenciaJaCadastradoTeste = ResourceUtils.getContentFromResource(
+                "/json/incorreto/banco-teste-com-nome-e-agencia-ja-cadastrado.json");
 	}
 
 	@Test
@@ -69,7 +74,7 @@ public class BancoIT {
 	@Test
     public void deveRetornarStatus400_QuandoCadastrarBancoSemEstado() {
         given()
-            .body(jsonCorretoBancoSemEstadoTeste)
+            .body(jsonIncorretoBancoSemEstadoTeste)
             .contentType(ContentType.JSON)
             .accept(ContentType.JSON)
         .when()
@@ -82,7 +87,20 @@ public class BancoIT {
     @Test
     public void deveRetornarStatus400_QuandoCadastrarBancoComEstadoInexistente() {
         given()
-            .body(jsonCorretoBancoComEstadoInexistenteTeste)
+            .body(jsonIncorretoBancoComEstadoInexistenteTeste)
+            .contentType(ContentType.JSON)
+            .accept(ContentType.JSON)
+        .when()
+            .post()
+        .then()
+            .statusCode(HttpStatus.BAD_REQUEST.value())
+            .body("title", equalTo(VIOLACAO_DE_REGRA_DE_NEGOCIO_PROBLEM_TYPE));
+    }
+
+    @Test
+    public void deveRetornarStatus400_QuandoCadastrarBancoComNomeAgenciaJaExistente() {
+        given()
+            .body(jsonIncorretoBancoComNomeAgenciaJaCadastradoTeste)
             .contentType(ContentType.JSON)
             .accept(ContentType.JSON)
         .when()

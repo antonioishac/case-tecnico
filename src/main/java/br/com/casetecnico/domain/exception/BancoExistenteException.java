@@ -1,6 +1,6 @@
 package br.com.casetecnico.domain.exception;
 
-public class BancoExistenteException extends EntidadeNaoEncontradaException {
+public class BancoExistenteException extends NegocioException {
 
 	private static final long serialVersionUID = 235943790099875220L;
 
