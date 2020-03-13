@@ -14,6 +14,15 @@
 	O consumo de uma API externa foi utilizado o seguinte endereço: https://swapi.co/api/planets/
 	Para consumir a API consulte a documentação swagger.
 
+##	Branchs
+	Caminho do repositório no github: https://github.com/antonioishac/case-tecnico
+	
+	# Projeto desenvolvido utilizando o banco de dados MySql: https://github.com/antonioishac/case-tecnico/tree/master
+
+	# Projeto desenvolvido utilizando o banco de dados Oracle12c: https://github.com/antonioishac/case-tecnico/tree/dev-oracle
+
+	# Foi desenvolvido em uma branch a utilização do banco de dados MySql para disponibilizar a API no Heroku.
+
 
 ##	Publicação do ambiente em um serviço cloud de hospedagens (Heroku)
 	https://case-tecnico-api.herokuapp.com
