@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -36,7 +37,8 @@ public class Estado implements Serializable {
 	@NotNull(groups = Groups.EstadoId.class, message = "{casetec-estado-codigo}")
 	@ApiModelProperty(value = "Código do estado", example = "1")
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_ESTADO")
+	@SequenceGenerator(name = "SQ_ESTADO", sequenceName = "SQ_ESTADO", allocationSize = 1)
 	@Column(name = "ID")
 	private Long codigo;
 

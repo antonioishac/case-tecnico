@@ -7,20 +7,17 @@ logging:
     br.com.casetecnico: DEBUG
 spring:  
   jpa:
-    database: mysql
+    database-platform: org.hibernate.dialect.Oracle10gDialect
+    database: oracle
     show-sql: true
     hibernate:
       naming:
-        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-    properties:
-      org.hibernate.envers.revision_field_name: ID_REVI
-      org.hibernate.envers.revision_type_field_name: ST_REVI
-      org.hibernate.envers.store_data_at_delete: true
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl    
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://localhost:3306/case-tecnico?useSSL=false
-    username: root
-    password: jesuscristo
+    url: jdbc:oracle:thin:@172.17.0.2:1521/ORCLPDB1
+    username: SYS
+    password: JesusCristo3008
     hikari:
       minimum-idle: 5
       # NUMERO MAXIMO DO POOL DE CONEXAO

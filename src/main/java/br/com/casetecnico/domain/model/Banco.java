@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
@@ -40,7 +41,8 @@ public class Banco implements Serializable {
 
 	@ApiModelProperty(readOnly = true)
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_BANCO")
+	@SequenceGenerator(name = "SQ_BANCO", sequenceName = "SQ_BANCO", allocationSize = 1)
 	@Column(name = "ID")
 	private Long codigo;
 

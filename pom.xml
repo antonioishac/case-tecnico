@@ -31,6 +31,7 @@
 		<validation-api.version>2.0.1.Final</validation-api.version>
 		<javassist.version>3.24.0-GA</javassist.version>
 		<hibernate.version>5.4.1.Final</hibernate.version>
+		<oracle.version>12.1.0.2</oracle.version>
 	</properties>
 
 	<dependencies>
@@ -67,11 +68,17 @@
 			<artifactId>lombok</artifactId>
 		</dependency>
 
+<!-- 		<dependency> -->
+<!-- 			<groupId>mysql</groupId> -->
+<!-- 			<artifactId>mysql-connector-java</artifactId> -->
+<!-- 			<scope>runtime</scope> -->
+<!-- 		</dependency> -->
+
 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<scope>runtime</scope>
-		</dependency>
+            <groupId>com.oracle.jdbc</groupId>
+            <artifactId>ojdbc7</artifactId>
+            <version>${oracle.version}</version>
+        </dependency>
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
