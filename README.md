@@ -1,7 +1,7 @@
 # API para cadastrar bancos, estados e consumir uma API externa
 
 #  Arquitetura do projeto
-	Projeto desenvolvido com Spring Boot, Spring Data JPA com Hibernate,
+	Projeto desenvolvido com Spring Boot, Spring Data JPA com Hibernate, Lombok
 	Validação com Bean Validation e mensagens configuradas em um arquivo .properties,
 	Controlando as exceptions da API com ExceptionHandler utilizando a arquitetura RestControllerAdvice
 	padronizando as respostas com a RFC 7807,
