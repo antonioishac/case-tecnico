@@ -18,7 +18,7 @@ CREATE TABLE tb_banco (
     bairro         		VARCHAR2(60),
     cidade   	   		VARCHAR2(50) NOT NULL,
     cep        	   		VARCHAR2(20),
-    estado_id      		NUMBER(10) NOT NULL
+    estado_id      		NUMBER(10) NOT NULL,
     data_cadastro   	DATE NOT NULL,
     data_atualizacao    DATE NOT NULL
 );
