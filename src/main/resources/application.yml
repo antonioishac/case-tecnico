@@ -7,7 +7,7 @@ logging:
     br.com.casetecnico: DEBUG
 spring:  
   jpa:
-    database: mysql
+    database: postgresql
     show-sql: true
     hibernate:
       naming:
@@ -18,9 +18,9 @@ spring:
       org.hibernate.envers.store_data_at_delete: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://localhost:3306/case-tecnico?useSSL=false
-    username: root
-    password: jesuscristo
+    url: jdbc:postgresql://172.28.0.2:5432/postgres
+    username: antonio.ishac
+    password: JesusCristo!
     hikari:
       minimum-idle: 5
       # NUMERO MAXIMO DO POOL DE CONEXAO
